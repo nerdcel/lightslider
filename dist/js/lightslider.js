@@ -1,6 +1,6 @@
-/*! lightslider - v1.1.6 - 2016-10-25
+/*! lightslider - v1.1.6 - 2018-05-03
 * https://github.com/sachinchoolur/lightslider
-* Copyright (c) 2016 Sachin N; Licensed MIT */
+* Copyright (c) 2018 Sachin N; Licensed MIT */
 (function ($, undefined) {
     'use strict';
     var defaults = {
@@ -381,7 +381,7 @@
                         }
                     }
                     var $cSouter = $slide.parent();
-                    $cSouter.find('.lSPager').html(pagers); 
+                    $cSouter.find('.lSPager').html(pagers);
                     if (settings.gallery === true) {
                         if (settings.vertical === true) {
                             // set Gallery thumbnail width
@@ -454,7 +454,7 @@
                         setCss();
                         if (!interval) {
                             $this.auto();
-                        }   
+                        }
                     }else{
                         obj.find('img').on('load', function () {
                             setTimeout(function () {
@@ -581,6 +581,29 @@
                                 $this.resetSlide($slide.find('.lslide').length);
                             }
                         }
+
+                        // disabled arrow control
+                        if (settings.loop === false) {
+                            if ($el.getCurrentSlideCount() === 1) {
+                                $slide.parent().
+                                find('.lSAction a.lSPrev').
+                                addClass('disabled');
+                            } else {
+                                $slide.parent().
+                                find('.lSAction a.lSPrev').
+                                removeClass('disabled');
+                            }
+                            if (slideValue === (w - elSize - settings.slideMargin)) {
+                                $slide.parent().
+                                find('.lSAction a.lSNext').
+                                addClass('disabled');
+                            } else {
+                                $slide.parent().
+                                find('.lSAction a.lSNext').
+                                removeClass('disabled');
+                            }
+                        }
+                        // disabled arrow control
                     }
                 };
                 refresh.calSlide();
@@ -880,7 +903,7 @@
                 $(window).on('focus', function(){
                     $this.auto();
                 });
-                
+
                 $(window).on('blur', function(){
                     clearInterval(interval);
                 });
@@ -1083,7 +1106,7 @@
                 }
             }
             return sc + 1;
-        }; 
+        };
         $el.getTotalSlideCount = function () {
             return $slide.find('.lslide').length;
         };
@@ -1108,7 +1131,7 @@
                 $el.refresh = function(){};
                 $el.getCurrentSlideCount = function(){};
                 $el.getTotalSlideCount = function(){};
-                $el.goToSlide = function(){}; 
+                $el.goToSlide = function(){};
                 $el.lightSlider = null;
                 refresh = {
                     init : function(){}
